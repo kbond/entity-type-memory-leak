@@ -13,7 +13,7 @@ class PostType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('category')
+            //->add('category')
         ;
     }
 
