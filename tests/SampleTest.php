@@ -2,21 +2,11 @@
 
 namespace App\Tests;
 
-use App\Factory\CategoryFactory;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Zenstruck\Browser\Test\HasBrowser;
-use Zenstruck\Foundry\Test\Factories;
-use Zenstruck\Foundry\Test\ResetDatabase;
+use App\Entity\Category;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class SampleTest extends KernelTestCase
+class SampleTest extends WebTestCase
 {
-    use Factories, ResetDatabase, HasBrowser;
-
-    protected function setUp(): void
-    {
-        CategoryFactory::createMany(3);
-    }
-
     public static function multiplier(): array
     {
         return \array_fill(0, $_SERVER['TEST_RUNS'] ?? 1, []);
@@ -28,14 +18,25 @@ class SampleTest extends KernelTestCase
      */
     public function new_post(): void
     {
-        $this->browser()
-            ->visit('/')
-            ->assertSuccessful()
-            ->visit('/post/new')
-            ->assertSuccessful()
-            ->visit('/')
-            ->assertSuccessful()
-        ;
+        $category = new Category();
+        $category->setName('foo');
+
+        self::bootKernel();
+        $om = self::$container->get('doctrine')->getManager();
+        $om->createQuery("DELETE App\Entity\Category e")->execute();
+        $om->persist($category);
+        $om->flush();
+
+        self::ensureKernelShutdown();
+
+        $client = static::createClient();
+
+        $client->request('GET', '/');
+        $this->assertResponseIsSuccessful();
+        $client->request('GET', '/post/new');
+        $this->assertResponseIsSuccessful();
+        $client->request('GET', '/');
+        $this->assertResponseIsSuccessful();
     }
 
     /**
@@ -44,9 +45,9 @@ class SampleTest extends KernelTestCase
      */
     public function homepage(): void
     {
-        $this->browser()
-            ->visit('/')
-            ->assertSuccessful()
-        ;
+        $client = static::createClient();
+
+        $client->request('GET', '/');
+        $this->assertResponseIsSuccessful();
     }
 }
