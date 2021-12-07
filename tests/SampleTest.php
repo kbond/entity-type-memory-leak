@@ -22,7 +22,7 @@ class SampleTest extends WebTestCase
         $category->setName('foo');
 
         self::bootKernel();
-        $om = self::$container->get('doctrine')->getManager();
+        $om = self::getContainer()->get('doctrine')->getManager();
         $om->createQuery("DELETE App\Entity\Category e")->execute();
         $om->persist($category);
         $om->flush();
