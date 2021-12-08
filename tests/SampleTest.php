@@ -4,6 +4,7 @@ namespace App\Tests;
 
 use App\Factory\CategoryFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\Form\ChoiceList\Factory\Cache\AbstractStaticOption;
 use Zenstruck\Browser\Test\HasBrowser;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
@@ -16,6 +17,14 @@ class SampleTest extends KernelTestCase
     {
         CategoryFactory::createMany(3);
     }
+
+    protected function tearDown(): void
+    {
+        AbstractStaticOption::reset();
+
+        parent::tearDown();
+    }
+
 
     public static function multiplier(): array
     {
