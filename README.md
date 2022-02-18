@@ -1,6 +1,14 @@
 # Doctrine Bridge EntityType Memory Leak Reproducer
 
-### Homepage Test (`5.4` branch)
+## Setup
+
+```bash
+composer install
+bin/console doctrine:database:create
+bin/console doctrine:schema:create
+```
+
+## Homepage Test
 
 *NO MEMORY LEAKS*
 
@@ -12,7 +20,7 @@ TEST_RUNS=20 bin/phpunit --filter=homepage
 TEST_RUNS=60 bin/phpunit --filter=homepage
 ```
 
-### New Post Test (`5.4` branch)
+## New Post Test
 
 *MEMORY LEAKS*
 

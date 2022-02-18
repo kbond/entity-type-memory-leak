@@ -1,7 +1,4 @@
 {
-    "behat/mink": {
-        "version": "v1.8.1"
-    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -83,9 +80,6 @@
     "egulias/email-validator": {
         "version": "3.1.1"
     },
-    "fakerphp/faker": {
-        "version": "v1.14.1"
-    },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.3"
     },
@@ -94,9 +88,6 @@
     },
     "monolog/monolog": {
         "version": "2.2.0"
-    },
-    "mtdowling/jmespath.php": {
-        "version": "2.6.0"
     },
     "nikic/php-parser": {
         "version": "v4.10.4"
@@ -498,26 +489,5 @@
     },
     "webmozart/assert": {
         "version": "1.10.0"
-    },
-    "zenstruck/assert": {
-        "version": "v1.0.1"
-    },
-    "zenstruck/browser": {
-        "version": "v0.4.0"
-    },
-    "zenstruck/callback": {
-        "version": "v1.2.0"
-    },
-    "zenstruck/foundry": {
-        "version": "1.16",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.10",
-            "ref": "934cdd918703a7fcfc3ef91723a2eac42a0f7690"
-        },
-        "files": [
-            "config/packages/zenstruck_foundry.yaml"
-        ]
     }
 }
